@@ -1,0 +1,40 @@
+{
+  "name": "resqhub-next",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "predev": "node scripts/setup-db.js",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "setup": "prisma generate && prisma db push && tsx prisma/seed.ts",
+    "db:push": "prisma db push",
+    "db:seed": "tsx prisma/seed.ts",
+    "db:studio": "prisma studio"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.7.0",
+    "bcryptjs": "^2.4.3",
+    "jose": "^5.2.0",
+    "leaflet": "^1.9.4",
+    "lucide-react": "^0.294.0",
+    "next": "^14.0.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-leaflet": "^4.2.1",
+    "recharts": "^2.10.3"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/leaflet": "^1.9.8",
+    "@types/node": "^20.10.5",
+    "@types/react": "^18.2.45",
+    "@types/react-dom": "^18.2.18",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32",
+    "prisma": "^5.7.0",
+    "tailwindcss": "^3.3.6",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}

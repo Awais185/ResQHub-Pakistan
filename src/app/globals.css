@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply bg-bg text-ink antialiased; font-feature-settings: 'cv02','cv03','cv04','cv11'; }
+  h1,h2,h3,h4 { @apply font-display; }
+}
+
+@layer components {
+  .card { @apply bg-white rounded-2xl border border-slate-200/80 shadow-sm; }
+  .btn-primary { @apply inline-flex items-center justify-center gap-2 rounded-xl bg-primary text-white font-semibold px-5 py-2.5 hover:bg-bright transition-colors disabled:opacity-60 disabled:cursor-not-allowed; }
+  .btn-secondary { @apply inline-flex items-center justify-center gap-2 rounded-xl bg-white text-ink font-semibold px-5 py-2.5 border border-slate-200 hover:bg-slate-50 transition-colors; }
+  .btn-danger { @apply inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 text-white font-semibold px-5 py-2.5 hover:bg-red-700 transition-colors; }
+  .input { @apply w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-ink placeholder:text-muted/60 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition; }
+  .badge { @apply inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-xs font-semibold; }
+}
+
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 8px; }
+.leaflet-container { font-family: inherit; border-radius: 12px; z-index: 0; }

@@ -1,0 +1,95 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  password      String
+  name          String
+  role          String   @default("CITIZEN")
+  locality      String?
+  organization  String?
+  createdAt     DateTime @default(now())
+  reports       CommunityReport[]
+  commitments   AidCommitment[]
+  auditLogs     AuditLog[]
+}
+
+model Locality {
+  id       String @id @default(cuid())
+  name     String @unique
+  district String @default("Lahore")
+  lat      Float?
+  lng      Float?
+}
+
+model Alert {
+  id           String   @id @default(cuid())
+  title        String
+  description  String
+  disasterType String
+  severity     String
+  locality     String
+  source       String
+  status       String   @default("ACTIVE")
+  publishedAt  DateTime @default(now())
+  createdBy    String?
+}
+
+model CommunityReport {
+  id                 String   @id @default(cuid())
+  userId             String?
+  user               User?    @relation(fields: [userId], references: [id])
+  locality           String
+  incidentType       String
+  description        String
+  affectedPeople     Int      @default(0)
+  affectedHouseholds Int      @default(0)
+  needs              String
+  lat                Float?
+  lng                Float?
+  status             String   @default("PENDING")
+  source             String   @default("CITIZEN")
+  verifiedBy         String?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model Organization {
+  id       String  @id @default(cuid())
+  name     String  @unique
+  focus    String
+  verified Boolean @default(false)
+  areas    String
+}
+
+model AidCommitment {
+  id           String   @id @default(cuid())
+  organization String
+  userId       String?
+  user         User?    @relation(fields: [userId], references: [id])
+  locality     String
+  category     String
+  quantity     String
+  status       String   @default("COMMITTED")
+  notes        String?
+  committedAt  DateTime @default(now())
+  dispatchedAt DateTime?
+  deliveredAt  DateTime?
+}
+
+model AuditLog {
+  id        String   @id @default(cuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  action    String
+  entity    String
+  meta      String?
+  createdAt DateTime @default(now())
+}
